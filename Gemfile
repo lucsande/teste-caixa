@@ -54,3 +54,13 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "react-rails", "~> 2.6"
+
+gem "bootstrap", "~> 4.3"
+
+gem "jquery-rails", "~> 4.3"
+
+gem "devise-jwt", "~> 0.6.0"
+
+gem "bcrypt", "~> 3.1"
+
+gem "rack-cors", "~> 1.0"
