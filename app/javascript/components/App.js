@@ -2,20 +2,12 @@ import React from 'react';
 // import PropTypes from "prop-types"
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import url from "./url"
 import Navbar from './Navbar';
 import AuthenticationModal from './AuthenticationModal';
 import PassInfoModal from './PassInfoModal';
 
 const App = () => {
-  console.log("HEROKU var", process.env.HEROKU)
-  if (process.env._ && process.env._.indexOf("heroku")) {
-   console.log("I'm in Heroku! _var");
-  }
-  if (process.env.HEROKU) {
-   console.log("I'm in Heroku! HEROKU var");
-  }
-
-
   const [userInfo, setUserInfo] = useState({
     user: {},
     passwordInfo: ""
@@ -24,7 +16,7 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/logged_in', {withCredentials: true})
+    axios.get(`${url()}/logged_in`, {withCredentials: true})
       .then((response) => {
         setIsLoggedIn(response.data.logged_in)
         setUserInfo({...userInfo, user: response.data.user})

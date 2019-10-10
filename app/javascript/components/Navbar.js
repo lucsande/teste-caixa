@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
+import url from "./url"
+
 
 const Navbar = (props) => {
   return (
@@ -13,7 +15,7 @@ const Navbar = (props) => {
 
 const createButtons = (props) => {
   const handleLogout = () => {
-    axios.delete('http://localhost:3000/logout', {withCredentials: true})
+    axios.delete(`${url()}/logout`, {withCredentials: true})
       .then((response) => {
         props.setIsLoggedIn(!response.data.logged_out)
       })
