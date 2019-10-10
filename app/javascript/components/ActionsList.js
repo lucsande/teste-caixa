@@ -6,7 +6,7 @@ const ActionsList = (props) => {
       <h5>O que gostaria de fazer hoje?</h5>
       <button onClick={() => props.setModalType("withdrawalModal")} className="btn btn-dark">Fazer saque</button>
       <button onClick={() => props.setModalType("depositModal")} className="btn btn-dark">Fazer depósito</button>
-      <button className="btn btn-dark">Fazer transferência</button>
+      <button onClick={() => props.setModalType("transferModal")} className="btn btn-dark">Fazer transferência</button>
       <button className="btn btn-dark">Ver extrato</button>
       <button className="btn btn-outline-danger">Apagar conta</button>
     </div>

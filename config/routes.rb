@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'homepage#index'
   resources :sessions, only: :create
   resources :registrations, only: :create
+  post '/users/find', to: 'users#find'
   patch '/users', to: 'users#update'
 
   delete :logout, to: "sessions#logout"

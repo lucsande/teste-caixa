@@ -8,6 +8,7 @@ import AuthenticationModal from './AuthenticationModal';
 import PassInfoModal from './PassInfoModal';
 import MainScreen from './MainScreen';
 import WithdrawalDepositModal from './WithdrawalDepositModal';
+import TransferModal from './TransferModal';
 
 const App = () => {
   const [user, setUser] = useState({})
@@ -29,9 +30,10 @@ const App = () => {
   return ([
     <Navbar key='1' isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setModalType={setModalType} />,
     <MainScreen key='2' user={user} modalType={modalType} setModalType={setModalType} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />,
-    <AuthenticationModal key='3' user={user} modalType={modalType} setModalType={setModalType} />,
+    <AuthenticationModal key='3' user={user} modalType={modalType} setModalType={setModalType} setPassword={setPassword} />,
     <PassInfoModal key='4' password={password} setPassword={setPassword} modalType={modalType} setModalType={setModalType} />,
-    <WithdrawalDepositModal key='5' user={user} modalType={modalType} setModalType={setModalType} />
+    <WithdrawalDepositModal key='6' user={user} modalType={modalType} setModalType={setModalType} />,
+    <TransferModal key='5' user={user} modalType={modalType} setModalType={setModalType} />
   ]);
 }
 
