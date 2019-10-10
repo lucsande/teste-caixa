@@ -7,7 +7,15 @@ import AuthenticationModal from './AuthenticationModal';
 import PassInfoModal from './PassInfoModal';
 
 const App = () => {
-  console.log(process.env)
+  console.log("HEROKU var", process.env.HEROKU)
+  if (process.env._ && process.env._.indexOf("heroku")) {
+   console.log("I'm in Heroku! _var");
+  }
+  if (process.env.HEROKU) {
+   console.log("I'm in Heroku! HEROKU var");
+  }
+
+
   const [userInfo, setUserInfo] = useState({
     user: {},
     passwordInfo: ""
