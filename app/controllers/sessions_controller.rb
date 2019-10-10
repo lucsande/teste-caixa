@@ -8,13 +8,14 @@ class SessionsController < ApplicationController
 
     if user
       session[:user_id] = user.id
+      puts session
       render json: {
         status: :created,
         logged_in: true,
         user: user
       }
     else
-      render json: { status: 401 }
+      render json: { status: 401, error: true }
     end
   end
 
@@ -26,7 +27,8 @@ class SessionsController < ApplicationController
       }
     else
       render json: {
-        logged_in: false
+        logged_in: false,
+        user: {}
       }
     end
   end

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import axios from 'axios';
 
 const Navbar = (props) => {
   return (
@@ -11,10 +12,17 @@ const Navbar = (props) => {
 }
 
 const createButtons = (props) => {
+  const handleLogout = () => {
+    axios.delete('http://localhost:3000/logout')
+      .then((response) => {
+        props.setIsLoggedIn(!response.data.logged_out)
+      })
+  }
+
   if (props.isLoggedIn) {
     return (
       <div>
-        <button className="btn btn-outline-light mx-1">Sair</button>
+        <button onClick={handleLogout} className="btn btn-outline-light mx-1">Sair</button>
       </div>
     )
   }
@@ -24,7 +32,7 @@ const createButtons = (props) => {
       <button onClick={() => props.setModalType('signUpModal')} className="btn btn-outline-light mx-1">
         Cadastro
       </button>
-      <button className="btn btn-outline-light mx-1">Entrar</button>
+      <button onClick={() => props.setModalType('loginModal')} className="btn btn-outline-light mx-1">Entrar</button>
     </div>
   )
 }

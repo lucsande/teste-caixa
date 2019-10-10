@@ -1,20 +1,31 @@
 import React from 'react';
 // import PropTypes from "prop-types"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import Navbar from './Navbar';
-import SignUpModal from './SignUpModal';
+import AuthenticationModal from './AuthenticationModal';
+import PassInfoModal from './PassInfoModal';
 
 const App = () => {
-  const [isLoggedIn, setisLoggedIn] = useState(false);
+  const [userInfo, setUserInfo] = useState({
+    user: {},
+    passwordInfo: ""
+  });
   const [modalType, setModalType] = useState("none");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const closeModal = () => {
-    setModalType('none')
-  }
+  useEffect(() => {
+    axios.get('http://localhost:3000/logged_in', {withCredentials: true})
+      .then((response) => {
+        setIsLoggedIn(response.data.logged_in)
+        setUserInfo({...userInfo, user: response.data.user})
+      })
+  }, [modalType])
 
   return ([
-    <Navbar key='1' isLoggedIn={isLoggedIn} setModalType={setModalType} />,
-    <SignUpModal key='2' hidden={modalType !== "signUpModal"} closeModal={closeModal} />
+    <Navbar key='1' isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setModalType={setModalType} />,
+    <AuthenticationModal key='2' userInfo={userInfo} setUserInfo={setUserInfo} modalType={modalType} setModalType={setModalType} />,
+    <PassInfoModal key='3' userInfo={userInfo} setUserInfo={setUserInfo} modalType={modalType} setModalType={setModalType} />
   ]);
 }
 
