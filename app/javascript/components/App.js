@@ -7,6 +7,7 @@ import AuthenticationModal from './AuthenticationModal';
 import PassInfoModal from './PassInfoModal';
 
 const App = () => {
+  console.log(process.env)
   const [userInfo, setUserInfo] = useState({
     user: {},
     passwordInfo: ""
