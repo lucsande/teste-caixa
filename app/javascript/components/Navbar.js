@@ -13,7 +13,7 @@ const Navbar = (props) => {
 
 const createButtons = (props) => {
   const handleLogout = () => {
-    axios.delete('http://localhost:3000/logout')
+    axios.delete('http://localhost:3000/logout', {withCredentials: true})
       .then((response) => {
         props.setIsLoggedIn(!response.data.logged_out)
       })
