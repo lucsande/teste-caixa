@@ -14,6 +14,10 @@
 
  @import "bootstrap";
 
+ .navbar {
+  z-index: 10;
+ }
+
  .modal-background {
   width: 100vw;
   height: 100vh;
@@ -25,4 +29,42 @@
 
 .modal-dialog {
   margin-top: 100px;
+}
+
+#logged-out-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  z-index: 0;
+  bottom: 3vh;
+}
+
+#logo-big {
+  font-size: 5rem;
+  font-weight: 900;
+}
+
+#main-screen {
+  margin: 5rem 3rem;
+}
+
+.balance-display {
+  margin: 0 0 0 1rem;
+  h2 {
+    font-size: 6rem;
+  }
+}
+
+#actions-list {
+  width: 40vw;
+  text-align: right;
+  margin: 0 0 0 5rem;
+  button {
+    width: 100%;
+    text-align: center;
+    margin: 0.3rem 0;
+  }
 }

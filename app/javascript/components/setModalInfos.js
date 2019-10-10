@@ -24,6 +24,20 @@ const setModalInfos = (modalType) => {
         passwordRequirement: "required",
         submitText: 'Entrar'
       }
+    case 'depositModal':
+      return {
+        title: 'Depósito em própria conta',
+        submitURL: `${url()}/users`,
+        error: 'Credenciais incorretas',
+        submitText: 'Fazer depósito'
+      }
+    case 'withdrawalModal':
+      return {
+        title: 'Saque de dinheiro',
+        submitURL: `${url()}/users`,
+        error: 'Credenciais incorretas',
+        submitText: 'Sacar quantia'
+      }
   }
 }
 

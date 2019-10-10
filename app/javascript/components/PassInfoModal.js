@@ -21,7 +21,7 @@ const AuthenticationModal = (props) => {
         btnText: 'Verifiquei minha senha'
       })
     } else {
-      props.setUserInfo({...props.userInfo, passwordInfo: ""})
+      props.setPassword("")
       props.setModalType('none')
     }
   }
@@ -36,7 +36,7 @@ const AuthenticationModal = (props) => {
           <Modal.Body>
             <p className="text-center">{info.message}</p>
             <p></p>
-            <h3 className={`${info.textRed}text-center my-3`}>{props.userInfo.passwordInfo}</h3>
+            <h3 className={`${info.textRed}text-center my-3`}>{props.password}</h3>
               <hr/>
               <div className="float-right">
                 <button type="button" onClick={handleClick} className="btn btn-dark m-1">{info.btnText}</button>

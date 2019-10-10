@@ -6,7 +6,7 @@ import url from "./url"
 
 const Navbar = (props) => {
   return (
-    <nav className="navbar navbar-light bg-dark d-flex justify-content-between">
+    <nav className="navbar navbar-light bg-dark d-flex justify-content-between z-">
       <span className="navbar-brand mb-0 text-white"><i className="fi-xnsuxl-lock-solid"></i>SeuCaixa</span>
       {createButtons(props)}
     </nav>

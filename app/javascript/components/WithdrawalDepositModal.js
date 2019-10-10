@@ -5,34 +5,36 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import setModalInfos from './setModalInfos'
 
-const AuthenticationModal = (props) => {
-  if (props.modalType !== 'signUpModal' && props.modalType !== 'loginModal') {
+const WithdrawalDepositModal = (props) => {
+  if (props.modalType !== 'withdrawalModal' && props.modalType !== 'depositModal') {
     return null
   }
 
-  const [name, setName] = useState("");
   const [securityNumber, setSecurityNumber] = useState("");
   const [password, setPassword] = useState("");
+  const [amount, setAmount] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const modalInfos = setModalInfos(props.modalType);
+  const isWithdrawal = props.modalType === "withdrawalModal"
 
   const handleSubmit = async () => {
     event.preventDefault();
+    if (props.user.balance + amount < 0) {
+      return setErrorMessage("Valor do saque superior ao disponível")
+    }
+
     try{
-      const response = await axios.post(
+      const response = await axios.patch(
         modalInfos.submitURL,
-        { user: { name: name, security_number: securityNumber, password: password } },
+        { amount: amount, withdrawal: isWithdrawal, user: { security_number: securityNumber, password: password } },
         { withCredentials: true }
       );
       if (response.data.error) {
         setErrorMessage(modalInfos.error)
-      } else if (props.modalType === 'loginModal') {
-        props.setModalType("none")
       } else {
-        setErrorMessage('')
-        props.setPassword(response.data.generated_password)
-        props.setModalType("passInfoModal")
+        console.log(amount)
+        props.setModalType("none")
       }
     }
     catch (error) {
@@ -49,17 +51,18 @@ const AuthenticationModal = (props) => {
           </Modal.Header>
 
           <Modal.Body>
+            <p>Saldo disponível: R${Number(props.user.balance).toFixed(2)}</p>
             <p className="text-danger">{errorMessage}</p>
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <input
-                  className={`${modalInfos.nameInputClass}form-control my-1`}
+                  className="form-control my-1"
                   type="text"
-                  name="name"
-                  placeholder="Nome completo"
-                  value={name}
-                  onChange={(event) => setName(event.target.value)}
-                  required={modalInfos.nameRequirement}
+                  name="security-number"
+                  placeholder="valor"
+                  value={amount}
+                  onChange={(event) => setAmount(parseFloat(event.target.value.replace(",", ".")))}
+                  required
                 />
               </div>
               <div className="form-group">
@@ -81,7 +84,7 @@ const AuthenticationModal = (props) => {
                   placeholder="Senha"
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
-                  required={modalInfos.passwordRequirement}
+                  required
                 />
               </div>
               <hr/>
@@ -97,4 +100,4 @@ const AuthenticationModal = (props) => {
 }
 
 
-export default AuthenticationModal;
+export default WithdrawalDepositModal;
