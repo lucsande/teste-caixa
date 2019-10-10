@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 
     if user
       session[:user_id] = user.id
-      puts session
+      puts "COOKIE SESSION -------------------- #{session}"
       render json: {
         status: :created,
         logged_in: true,
