@@ -7,13 +7,18 @@ class UsersController < ApplicationController
            .try(:authenticate, params["user"]["password"])
 
     if session[:user_id] = user.id
-      user.balance += params["amount"] unless params["withdrawal"]
-      user.balance -= params["amount"] if params["withdrawal"]
+      amount = params["withdrawal"] ? -params["amount"] : params["amount"]
+      transaction_type = params["withdrawal"] ? 'withdrawal' : 'deposit'
+      user.balance += params["amount"]
+
       user.save
+      transaction = DepositWithdrawal.create(type: transaction_type, value: amount)
+
       render json: {
         status: :created,
         amount: params["amount"],
-        user: user
+        user: user,
+        transaction: transaction
       }
     else
       render json: { status: 401, error: true }

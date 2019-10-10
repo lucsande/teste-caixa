@@ -20,8 +20,8 @@ const WithdrawalDepositModal = (props) => {
 
   const handleSubmit = async () => {
     event.preventDefault();
-    if (props.user.balance + amount < 0) {
-      return setErrorMessage("Valor do saque superior ao disponível")
+    if (isWithdrawal && props.user.balance - amount < 0) {
+      return setErrorMessage("Valor do saque é superior ao saldo disponível")
     }
 
     try{
@@ -33,7 +33,7 @@ const WithdrawalDepositModal = (props) => {
       if (response.data.error) {
         setErrorMessage(modalInfos.error)
       } else {
-        console.log(amount)
+        console.log(response)
         props.setModalType("none")
       }
     }
