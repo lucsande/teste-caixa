@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Para acessar commits, rodar no terminal o comando:
+  git bundle unbundle teste-caixa.bundle
 
-Things you may want to cover:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Para inicializar a versão de desenvolvimento, rodar no terminal os comandos:
+  rails db:create
+  rails db:migrate
+  rails s
+Projeto estará sendo servido no port localhost:3000
