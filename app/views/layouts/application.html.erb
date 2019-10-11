@@ -13,6 +13,6 @@
     <%= yield %>
     <div id="root"></div>
     <%= javascript_pack_tag 'index' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-suppress-warning': true, 'data-turbolinks-track': 'reload' %>
   </body>
 </html>
