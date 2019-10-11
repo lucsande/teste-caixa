@@ -16,9 +16,9 @@ const StatementModal = (props) => {
     return (
       <React.Fragment>
         {props.transactions.map(transaction => (
-          <tr>
-            <td>{transaction.date}</td>
-            <td>{transaction.type}{transaction.receiver}</td>
+          <tr key={transaction.id}>
+            <td >{transaction.date}</td>
+            <td >{transaction.type}{transaction.receiver}</td>
             <td className={`${transaction.color}`}>{transaction.amount}</td>
           </tr>
         ))}
@@ -36,7 +36,7 @@ const StatementModal = (props) => {
             <table id="statement" className="table table-striped">
               <thead>
                 <tr>
-                  <th>Data</th>
+                  <th>Data - Horário</th>
                   <th>Descrição</th>
                   <th>Valor</th>
                 </tr>

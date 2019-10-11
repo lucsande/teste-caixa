@@ -10,6 +10,7 @@ import PassInfoModal from './modals/PassInfoModal';
 import WithdrawalDepositModal from './modals/WithdrawalDepositModal';
 import TransferModal from './modals/TransferModal';
 import StatementModal from './modals/StatementModal';
+import DeleteModal from './modals/DeleteModal';
 
 const App = () => {
   const [user, setUser] = useState({})
@@ -35,7 +36,8 @@ const App = () => {
     <PassInfoModal key='4' password={password} setPassword={setPassword} modalType={modalType} setModalType={setModalType} />,
     <WithdrawalDepositModal key='5' user={user} modalType={modalType} setModalType={setModalType} />,
     <TransferModal key='6' user={user} modalType={modalType} setModalType={setModalType} />,
-    <StatementModal key='7' user={user} modalType={modalType} setModalType={setModalType} transactions={transactions} />
+    <StatementModal key='7' user={user} modalType={modalType} setModalType={setModalType} transactions={transactions} />,
+    <DeleteModal key='8' user={user} modalType={modalType} setModalType={setModalType} setIsLoggedIn={setIsLoggedIn} />
   ]);
 }
 

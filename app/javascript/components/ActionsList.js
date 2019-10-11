@@ -10,7 +10,7 @@ const ActionsList = (props) => {
       <button onClick={() => props.setModalType("depositModal")} className="btn btn-dark">Fazer depósito</button>
       <button onClick={() => props.setModalType("transferModal")} className="btn btn-dark">Fazer transferência</button>
       <button onClick={() => fetchTransactions(props)} className="btn btn-dark">Ver extrato</button>
-      <button onClick={() => props.setModalType("delete")} className="btn btn-outline-danger">Apagar conta</button>
+      <button onClick={() => props.setModalType("deleteModal")} className="btn btn-outline-danger">Apagar conta</button>
     </div>
   )
 }
@@ -36,7 +36,7 @@ const fetchTransactions = async (props) => {
       info.receiver = ` para ${transaction.receiver_name}`
     }
     if (info.type === "transfer" && transaction.receiver_id === response.data.user.id) {
-      info.receiver = ` de ${transaction.receiver_name}`
+      info.receiver = ` de ${transaction.payer_name}`
     }
     if (info.type !== "deposit" && transaction.payer_id === response.data.user.id) {
       info.color = "text-danger"

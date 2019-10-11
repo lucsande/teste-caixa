@@ -2,8 +2,9 @@ class UsersController < ApplicationController
   include CurrentUserConcern
 
   def find
+    security_number = params['user']['security_number'].gsub(/\D/, '')
     user = User
-           .find_by(security_number: params["security_number"])
+           .find_by(security_number: security_number)
 
     if user
       transactions = []
@@ -19,6 +20,8 @@ class UsersController < ApplicationController
           new_transaction[:type] = transaction.transaction_type
           new_transaction[:amount] = transaction.amount
           new_transaction[:payer_id] = transaction.payer_id
+          new_transaction[:payer_name] = User.find(transaction.payer_id).name
+          new_transaction[:receiver_id] = transaction.receiver_id
           new_transaction[:receiver_name] = transaction.receiver_name
 
           new_transaction
@@ -35,15 +38,17 @@ class UsersController < ApplicationController
   end
 
   def update
+    payer_number = params['payer']['security_number'].gsub(/\D/, '')
+    receiver_number = params['receiver']['security_number'].gsub(/\D/, '')
     transaction_type = params["transactionType"]
     amount = params["amount"]
 
     payer = User
-           .find_by(security_number: params["payer"]["security_number"])
+           .find_by(security_number: payer_number)
            .try(:authenticate, params["payer"]["password"])
 
     receiver = User
-           .find_by(security_number: params["receiver"]["security_number"])
+           .find_by(security_number: receiver_number)
 
     if session[:user_id] == payer.id
       payer.balance += transaction_type == 'deposit' ? amount : -amount
@@ -65,7 +70,17 @@ class UsersController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
+    security_number = params['user']['security_number'].gsub(/\D/, '')
+    user = User.find_by(security_number: security_number)
+    authentication = user.try(:authenticate, params["user"]["password"])
 
+    if authentication
+      user.deleted = true
+      user.save
+      render json: { status: :deleted, user: user }
+    else
+      render json: { status: 401, error: true }
+    end
   end
 end

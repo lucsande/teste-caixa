@@ -2,11 +2,12 @@ class SessionsController < ApplicationController
   include CurrentUserConcern
 
   def create
+    security_number = params['user']['security_number'].gsub(/\D/, '')
     user = User
-           .find_by(security_number: params["user"]["security_number"])
+           .find_by(security_number: security_number)
            .try(:authenticate, params["user"]["password"])
 
-    if user
+    if user && user.deleted == false
       session[:user_id] = user.id
       # puts "COOKIE SESSION -------------------- #{session}"
       render json: {
@@ -14,6 +15,8 @@ class SessionsController < ApplicationController
         logged_in: true,
         user: user
       }
+    elsif user
+      render json: { status: 401, error: true, deleted: true }
     else
       render json: { status: 401, error: true }
     end

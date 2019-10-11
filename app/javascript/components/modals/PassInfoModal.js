@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-const APassInfoodal = (props) => {
+const PassInfoModal = (props) => {
   if (props.modalType !== 'passInfoModal') {
     return null
   }

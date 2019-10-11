@@ -25,7 +25,9 @@ const AuthenticationModal = (props) => {
         { user: { name: name, security_number: securityNumber, password: password } },
         { withCredentials: true }
       );
-      if (response.data.error) {
+      if (response.data.error && response.data.deleted) {
+        setErrorMessage("Conta deletada, favor falar com seu gerente se quiser reativá-la.")
+      } else if (response.data.error) {
         setErrorMessage(modalInfos.error)
       } else if (props.modalType === 'loginModal') {
         props.setModalType("none")
