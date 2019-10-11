@@ -1,6 +1,8 @@
 import React from 'react'
 import BalanceDisplay from './BalanceDisplay';
 import ActionsList from './ActionsList';
+import url from "./modals/url"
+
 
 const MainScreen = (props) => {
   const handleLogout = () => {
@@ -28,11 +30,13 @@ const MainScreen = (props) => {
   }
 
   return (
-    <div className="m-5">
-      <h3>Olá, {props.user.name}.</h3>
+    <div>
+      <h3 id="greeting">Olá, {props.user.name}.</h3>
       <div className="d-flex justify-content-around" id="main-screen">
         <BalanceDisplay user={props.user} />
-        <ActionsList user={props.user} setUser={props.setUser} modalType={props.modalType} setModalType={props.setModalType} />
+        <ActionsList user={props.user} setUser={props.setUser} modalType={props.modalType}
+          setModalType={props.setModalType} setTransactions={props.setTransactions}
+        />
       </div>
     </div>
   )

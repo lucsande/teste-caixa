@@ -28,7 +28,14 @@
  }
 
 .modal-dialog {
-  margin-top: 100px;
+  margin-top:50px;
+  max-height:80vh;
+  max-width:60vw;
+}
+
+.modal-body {
+  max-height:60vh;
+  overflow: auto;
 }
 
 #logged-out-screen {
@@ -47,8 +54,13 @@
   font-weight: 900;
 }
 
+#greeting {
+  margin: 4rem 7rem;
+}
+
 #main-screen {
-  margin: 5rem 3rem;
+  margin: 5rem auto;
+  max-width: 70vw;
 }
 
 .balance-display {

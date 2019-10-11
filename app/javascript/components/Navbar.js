@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
-import url from "./url"
+import url from "./modals/url"
 
 
 const Navbar = (props) => {

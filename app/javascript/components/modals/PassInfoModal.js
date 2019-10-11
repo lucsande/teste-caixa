@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-const AuthenticationModal = (props) => {
+const APassInfoodal = (props) => {
   if (props.modalType !== 'passInfoModal') {
     return null
   }
@@ -37,15 +37,17 @@ const AuthenticationModal = (props) => {
             <p className="text-center">{info.message}</p>
             <p></p>
             <h3 className={`${info.textRed}text-center my-3`}>{props.password}</h3>
-              <hr/>
-              <div className="float-right">
-                <button type="button" onClick={handleClick} className="btn btn-dark m-1">{info.btnText}</button>
-              </div>
+            <hr/>
           </Modal.Body>
+          <Modal.Footer>
+            <div className="float-right">
+              <button type="button" onClick={handleClick} className="btn btn-dark m-1">{info.btnText}</button>
+            </div>
+          </Modal.Footer>
         </Modal.Dialog>
       </div>
     );
 }
 
 
-export default AuthenticationModal;
+export default PassInfoModal;

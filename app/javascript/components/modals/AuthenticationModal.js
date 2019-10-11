@@ -48,49 +48,49 @@ const AuthenticationModal = (props) => {
             <button className="btn" onClick={() => props.setModalType('none')}><h5 className="float-right">X</h5></button>
           </Modal.Header>
 
-          <Modal.Body>
-            <p className="text-danger">{errorMessage}</p>
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <input
-                  className={`${modalInfos.nameInputClass}form-control my-1`}
-                  type="text"
-                  name="name"
-                  placeholder="Nome completo"
-                  value={name}
-                  onChange={(event) => setName(event.target.value)}
-                  required={modalInfos.nameRequirement}
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className="form-control my-1"
-                  type="text"
-                  name="security-number"
-                  placeholder="CPF"
-                  value={securityNumber}
-                  onChange={(event) => setSecurityNumber(event.target.value)}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className={`${modalInfos.passwordInputClass}form-control my-1`}
-                  type="password"
-                  name="password"
-                  placeholder="Senha"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                  required={modalInfos.passwordRequirement}
-                />
-              </div>
+          <form onSubmit={handleSubmit}>
+            <Modal.Body>
+              <p className="text-danger">{errorMessage}</p>
+                <div className="form-group">
+                  <input
+                    className={`${modalInfos.nameInputClass}form-control my-1`}
+                    type="text"
+                    name="name"
+                    placeholder="Nome completo"
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
+                    required={modalInfos.nameRequirement}
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    className="form-control my-1"
+                    type="text"
+                    name="security-number"
+                    placeholder="CPF"
+                    value={securityNumber}
+                    onChange={(event) => setSecurityNumber(event.target.value)}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <input
+                    className={`${modalInfos.passwordInputClass}form-control my-1`}
+                    type="password"
+                    name="password"
+                    placeholder="Senha"
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                    required={modalInfos.passwordRequirement}
+                  />
+                </div>
               <hr/>
               <div className="float-right">
                 <button type="button" onClick={() => props.setModalType('none')} className="btn btn-outline-dark m-1">Cancelar</button>
                 <button type="submit" className="btn btn-dark m-1">{modalInfos.submitText}</button>
               </div>
-            </form>
-          </Modal.Body>
+            </Modal.Body>
+          </form>
         </Modal.Dialog>
       </div>
     );
