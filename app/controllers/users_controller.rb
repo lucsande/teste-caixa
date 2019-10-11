@@ -45,28 +45,30 @@ class UsersController < ApplicationController
 
     payer = User
            .find_by(security_number: payer_number)
-           .try(:authenticate, params["payer"]["password"])
+    authentication = payer.try(:authenticate, params["payer"]["password"])
 
     receiver = User
            .find_by(security_number: receiver_number)
 
-    if payer.id && session[:user_id] == payer.id
-      payer.balance += transaction_type == 'deposit' ? amount : -amount
-      receiver.balance += amount if transaction_type == 'transfer'
+    if authentication
+      if session[:user_id] == payer.id
+        payer.balance += transaction_type == 'deposit' ? amount : -amount
+        receiver.balance += amount if transaction_type == 'transfer'
 
-      payer.save
-      receiver.save
-      transaction = Transaction.new(transaction_type: transaction_type, amount: amount, receiver_name: receiver.name)
-      transaction.payer = payer
-      transaction.receiver = receiver
-      transaction.save!
+        payer.save
+        receiver.save
+        transaction = Transaction.new(transaction_type: transaction_type, amount: amount, receiver_name: receiver.name)
+        transaction.payer = payer
+        transaction.receiver = receiver
+        transaction.save!
 
-      render json: {
-        status: :created,
-        transaction: transaction
-      }
-    else
-      render json: { status: 401, error: true }
+        render json: {
+          status: :created,
+          transaction: transaction
+        }
+      else
+        render json: { status: 401, error: true }
+      end
     end
   end
 
