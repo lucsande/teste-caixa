@@ -50,7 +50,7 @@ class UsersController < ApplicationController
     receiver = User
            .find_by(security_number: receiver_number)
 
-    if session[:user_id] == payer.id
+    if payer.id && session[:user_id] == payer.id
       payer.balance += transaction_type == 'deposit' ? amount : -amount
       receiver.balance += amount if transaction_type == 'transfer'
 
