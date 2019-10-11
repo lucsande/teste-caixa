@@ -66,10 +66,9 @@ class UsersController < ApplicationController
           status: :created,
           transaction: transaction
         }
-      else
-        render json: { status: 401, error: true }
       end
     end
+      render json: { status: 401, error: true }
   end
 
   def destroy
