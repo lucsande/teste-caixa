@@ -33,7 +33,7 @@ class UsersController < ApplicationController
         user: { id:user.id, name: user.name, security_number: user.security_number, transactions: transactions.uniq }
       }
     else
-      render json: { status: 500, error: true }
+      render json: { error: true }
     end
   end
 
