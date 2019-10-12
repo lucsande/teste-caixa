@@ -20,8 +20,6 @@ const WithdrawalDepositModal = (props) => {
 
   const handleSubmit = async () => {
     event.preventDefault();
-    console.log(props.user.balance)
-    console.log(props.user.balance - amount)
     if (transactionType === "withdrawal" && props.user.balance - amount < 0) {
       return setErrorMessage("Valor do saque é superior ao saldo disponível")
     }
@@ -67,7 +65,7 @@ const WithdrawalDepositModal = (props) => {
                     name="valor"
                     placeholder="valor da operação"
                     value={amount}
-                    onChange={(event) => setAmount(event.target.value)}
+                    onChange={(event) => setAmount(parseFloat(event.target.value))}
                     required
                   />
                 </div>

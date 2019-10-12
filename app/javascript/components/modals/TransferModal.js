@@ -37,13 +37,10 @@ const WithdrawalDepositModal = (props) => {
   const handleSubmit = async () => {
     event.preventDefault();
     if (props.user.balance - amount < 0) {
-      return setErrorMessage("Valor do saque é superior ao saldo disponível")
-    }
-    if (receiverName === "Procurando beneficiado...") {
-      return setErrorMessage("CPF do beneficiado não encontrado, favor verificar os dados.")
-    }
-    if (props.user.balance - amount < 0) {
       return setErrorMessage("Valor da transferência é superior ao saldo disponível")
+    }
+    if (receiverName === "procurando...") {
+      return setErrorMessage("CPF do beneficiado não encontrado, favor verificar os dados.")
     }
 
     try{
@@ -99,7 +96,7 @@ const WithdrawalDepositModal = (props) => {
                       name="security-number"
                       placeholder="valor da transferência"
                       value={amount}
-                      onChange={(event) => setAmount(event.target.value)}
+                      onChange={(event) => setAmount(parseFloat(event.target.value))}
                       required
                     />
                   </div>
