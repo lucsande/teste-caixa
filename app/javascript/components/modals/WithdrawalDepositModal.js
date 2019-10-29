@@ -24,6 +24,11 @@ const WithdrawalDepositModal = (props) => {
       return setErrorMessage("Valor do saque é superior ao saldo disponível")
     }
 
+    if (isNaN(amount)) {
+      return setErrorMessage("Valor da transação deve ser um número")
+    }
+
+
     try{
       const response = await axios.patch(
         modalInfos.submitURL,

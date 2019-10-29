@@ -1,8 +1,6 @@
 # README
 
-Para acessar commits, rodar no terminal o comando:
-  git bundle unbundle teste-caixa.bundle
-
+Pequeno projeto simulando o funcionamento de caixa eletonico, feito para praticar a integração de React com Ruby on Rails.
 
 Para inicializar a versão de desenvolvimento, rodar no terminal os comandos:
   rails db:create
