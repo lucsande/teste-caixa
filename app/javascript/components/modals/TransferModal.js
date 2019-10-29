@@ -34,20 +34,35 @@ const WithdrawalDepositModal = (props) => {
     }
   }
 
+  const handleChange = (event) => {
+    const newAmount = parseFloat(event.target.value.replace(",", "."))
+    if (isNaN(newAmount)) {
+      setErrorMessage("Valor da transação deve ser um número")
+    } else {
+      setErrorMessage("")
+    }
+    setAmount(event.target.value)
+  }
+
   const handleSubmit = async () => {
     event.preventDefault();
+    const newAmount = parseFloat(amount.replace(",", "."))
+
     if (props.user.balance - amount < 0) {
       return setErrorMessage("Valor da transferência é superior ao saldo disponível")
     }
     if (receiverName === "procurando...") {
       return setErrorMessage("CPF do beneficiado não encontrado, favor verificar os dados.")
     }
+    if (isNaN(newAmount)) {
+      return
+    }
 
     try{
       const response = await axios.patch(
         `${url()}/users`,
         {
-          amount: parseFloat(amount.replace(",", ".")),
+          amount: newAmount,
           transactionType: "transfer",
           payer: { security_number: securityNumber, password: password },
           receiver: { security_number: receiverNumber }
@@ -96,7 +111,7 @@ const WithdrawalDepositModal = (props) => {
                       name="security-number"
                       placeholder="valor da transferência"
                       value={amount}
-                      onChange={(event) => setAmount(parseFloat(event.target.value))}
+                      onChange={(event) => handleChange(event)}
                       required
                     />
                   </div>

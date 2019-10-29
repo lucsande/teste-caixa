@@ -18,24 +18,33 @@ const WithdrawalDepositModal = (props) => {
   const modalInfos = setModalInfos(props.modalType);
   const transactionType = props.modalType === "withdrawalModal" ? "withdrawal" : "deposit"
 
+  const handleChange = (event) => {
+    const newAmount = parseFloat(event.target.value.replace(",", "."))
+    if (isNaN(newAmount)) {
+      setErrorMessage("Valor da transação deve ser um número")
+    } else {
+      setErrorMessage("")
+    }
+    setAmount(event.target.value)
+  }
+
   const handleSubmit = async () => {
     event.preventDefault();
+    const newAmount = parseFloat(amount.replace(",", "."))
+
     if (transactionType === "withdrawal" && props.user.balance - amount < 0) {
       return setErrorMessage("Valor do saque é superior ao saldo disponível")
     }
 
-    if (isNaN(amount)) {
-      return setErrorMessage("Valor da transação deve ser um número")
+    if (isNaN(newAmount)) {
+      return
     }
-    // console.log(typeof amount)
-    // console.log(amount)
-
 
     try {
       const response = await axios.patch(
         modalInfos.submitURL,
         {
-          amount: parseFloat(amount),
+          amount: newAmount,
           transactionType: transactionType,
           payer: { security_number: securityNumber, password: password },
           receiver: { security_number: securityNumber, password: password }
@@ -72,7 +81,7 @@ const WithdrawalDepositModal = (props) => {
                 name="valor"
                 placeholder="valor da operação"
                 value={amount}
-                onChange={(event) => setAmount(parseFloat(event.target.value.replace(",", ".")))}
+                onChange={(event) => handleChange(event)}
                 required
               />
             </div>
