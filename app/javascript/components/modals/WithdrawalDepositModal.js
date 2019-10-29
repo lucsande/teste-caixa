@@ -16,7 +16,7 @@ const WithdrawalDepositModal = (props) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const modalInfos = setModalInfos(props.modalType);
-  const transactionType = props.modalType === "withdrawalModal"? "withdrawal" : "deposit"
+  const transactionType = props.modalType === "withdrawalModal" ? "withdrawal" : "deposit"
 
   const handleSubmit = async () => {
     event.preventDefault();
@@ -27,13 +27,15 @@ const WithdrawalDepositModal = (props) => {
     if (isNaN(amount)) {
       return setErrorMessage("Valor da transação deve ser um número")
     }
+    // console.log(typeof amount)
+    // console.log(amount)
 
 
-    try{
+    try {
       const response = await axios.patch(
         modalInfos.submitURL,
         {
-          amount: parseFloat(amount.replace(",", ".")),
+          amount: parseFloat(amount),
           transactionType: transactionType,
           payer: { security_number: securityNumber, password: password },
           receiver: { security_number: securityNumber, password: password }
@@ -52,61 +54,61 @@ const WithdrawalDepositModal = (props) => {
   }
 
   return (
-      <div className="modal-background">
-        <Modal.Dialog>
-          <Modal.Header>
-            <Modal.Title>{modalInfos.title}</Modal.Title>
-            <button className="btn" onClick={() => props.setModalType('none')}><h5 className="float-right">X</h5></button>
-          </Modal.Header>
+    <div className="modal-background">
+      <Modal.Dialog>
+        <Modal.Header>
+          <Modal.Title>{modalInfos.title}</Modal.Title>
+          <button className="btn" onClick={() => props.setModalType('none')}><h5 className="float-right">X</h5></button>
+        </Modal.Header>
 
-          <form onSubmit={handleSubmit}>
-            <Modal.Body>
-              <p>Saldo disponível: R${Number(props.user.balance).toFixed(2)}</p>
-              <p className="text-danger">{errorMessage}</p>
-                <div className="form-group">
-                  <input
-                    className="form-control my-1"
-                    type="text"
-                    name="valor"
-                    placeholder="valor da operação"
-                    value={amount}
-                    onChange={(event) => setAmount(parseFloat(event.target.value))}
-                    required
-                  />
-                </div>
-                <p>Favor confirmar as suas credenciais</p>
-                <div className="form-group">
-                  <input
-                    className="form-control my-1"
-                    type="text"
-                    name="security-number"
-                    placeholder="Favor confirmar seu CPF"
-                    value={securityNumber}
-                    onChange={(event) => setSecurityNumber(event.target.value)}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    className={`form-control my-1`}
-                    type="password"
-                    name="password"
-                    placeholder="Favor confirmar sua senha"
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                    required
-                  />
-                </div>
-                <hr/>
-                <div className="float-right">
-                  <button type="button" onClick={() => props.setModalType('none')} className="btn btn-outline-dark m-1">Cancelar</button>
-                  <button type="submit" className="btn btn-dark m-1">{modalInfos.submitText}</button>
-                </div>
-            </Modal.Body>
-          </form>
-        </Modal.Dialog>
-      </div>
-    );
+        <form onSubmit={handleSubmit}>
+          <Modal.Body>
+            <p>Saldo disponível: R${Number(props.user.balance).toFixed(2)}</p>
+            <p className="text-danger">{errorMessage}</p>
+            <div className="form-group">
+              <input
+                className="form-control my-1"
+                type="text"
+                name="valor"
+                placeholder="valor da operação"
+                value={amount}
+                onChange={(event) => setAmount(parseFloat(event.target.value.replace(",", ".")))}
+                required
+              />
+            </div>
+            <p>Favor confirmar as suas credenciais</p>
+            <div className="form-group">
+              <input
+                className="form-control my-1"
+                type="text"
+                name="security-number"
+                placeholder="Favor confirmar seu CPF"
+                value={securityNumber}
+                onChange={(event) => setSecurityNumber(event.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <input
+                className={`form-control my-1`}
+                type="password"
+                name="password"
+                placeholder="Favor confirmar sua senha"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                required
+              />
+            </div>
+            <hr />
+            <div className="float-right">
+              <button type="button" onClick={() => props.setModalType('none')} className="btn btn-outline-dark m-1">Cancelar</button>
+              <button type="submit" className="btn btn-dark m-1">{modalInfos.submitText}</button>
+            </div>
+          </Modal.Body>
+        </form>
+      </Modal.Dialog>
+    </div>
+  );
 }
 
 
