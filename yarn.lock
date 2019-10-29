@@ -1344,6 +1344,11 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
+bluebird@^3.3.4:
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.1.tgz#df70e302b471d7473489acf26a93d63b53f874de"
+  integrity sha512-DdmyoGCleJnkbp3nkbxTLJ18rjDsE4yCggEwKNXkeV123sPNfOCYeDoeuOY+F2FrSjO1YXcTU+dsy96KMy+gcg==
+
 bluebird@^3.5.5:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.0.tgz#56a6a886e03f6ae577cffedeb524f8f2450293cf"
@@ -3410,6 +3415,13 @@ https-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
+
+hub@^6.1.2:
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/hub/-/hub-6.1.2.tgz#b87314f90b84a8e191040ae25100cad39cb89b2f"
+  integrity sha1-uHMU+QuEqOGRBAriUQDK05y4my8=
+  dependencies:
+    bluebird "^3.3.4"
 
 iconv-lite@0.4.24, iconv-lite@^0.4.4:
   version "0.4.24"
